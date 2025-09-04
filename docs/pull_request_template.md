@@ -12,6 +12,7 @@
 |     | 🎨 Style           |
 |     | :hammer: Refactoring |
 |     | :scroll: Docs      |
+|     | 🐛 Bug fix      |
 
 ## Screenshots
 <!-- Add screenshots if relevant -->
