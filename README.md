@@ -12,7 +12,7 @@ It connects to the **Finch Sandbox API** to fetch and display company, directory
    ```bash
    git clone <repo-url>
    cd <repo-folder>
-````
+   ```
 
 2. **Install dependencies**
 
