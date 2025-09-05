@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 
-export async function GET(req: NextRequest) {
+export async function POST(req: NextRequest) {
   const token = req.cookies.get("finch_token")?.value;
   if (!token) return NextResponse.json({ error: "Not connected" }, { status: 401 });
 
@@ -10,10 +10,17 @@ export async function GET(req: NextRequest) {
   const resp = await fetch(
     `https://api.tryfinch.com/employer/individual?employee_id=${encodeURIComponent(employeeId)}`,
     {
+      method: "POST",
       headers: {
         Authorization: `Bearer ${token}`,
         "Finch-API-Version": "2020-09-17",
+        "Content-Type": "application/json",
       },
+      body: JSON.stringify({
+        requests: [{
+          individual_id: employeeId,
+        }],
+      }),
     }
   );
 

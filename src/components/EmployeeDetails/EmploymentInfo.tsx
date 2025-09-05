@@ -10,10 +10,10 @@ export default function EmploymentInfo({ employeeId }: { employeeId: string }) {
   useEffect(() => {
     const loadEmployment = async () => {
       setData(null);
-      const res = await fetch(`/api/data/employment?employee_id=${encodeURIComponent(employeeId)}`);
+      const res = await fetch(`/api/data/employment?employee_id=${encodeURIComponent(employeeId)}`, { method: "POST" });
       if (res.ok) {
         const json = await res.json();
-        setData(json);
+        setData(json.responses?.[0]?.body ?? null);
       }
     };
     loadEmployment();
@@ -25,8 +25,8 @@ export default function EmploymentInfo({ employeeId }: { employeeId: string }) {
     <Box borderWidth="1px" borderRadius="md" p={4}>
       <Text fontWeight="bold" mb={2}>Employment Details</Text>
       <Text>Title: {data.title || "—"}</Text>
-      <Text>Department: {data.department || "—"}</Text>
-      <Text>Status: {data.employment?.status || "—"}</Text>
+      <Text>Department: {data.department.name || "—"}</Text>
+      <Text>Status: {data.employment_status || "—"}</Text>
     </Box>
   );
 }
