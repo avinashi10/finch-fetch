@@ -2,7 +2,7 @@
 
 // LIBRARY IMPORTS
 import { Button, Container, Heading, Stack } from "@chakra-ui/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 // LOCAL IMPORTS
 import CompanyCard from "../components/CompanyCard";
@@ -15,6 +15,20 @@ export default function Home() {
   const [isConnected, setIsConnected] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+
+  // EFFECTS
+  useEffect(() => {
+    const checkStatus = async () => {
+      try {
+        const res = await fetch("/api/auth/status");
+        const data = await res.json();
+        setIsConnected(data.isConnected);
+      } catch {
+        setIsConnected(false);
+      }
+    };
+    checkStatus();
+  }, []);
 
   // HANDLERS
   const handleConnect = async () => {
