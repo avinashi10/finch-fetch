@@ -21,10 +21,10 @@ export default function Home() {
       try {
         setIsLoading(true);
         setError(null);
-        const res = await fetch("/api/finch/auth/connect", { method: "POST" });
+        const res = await fetch("/api/auth/connect", { method: "POST" });
         if (!res.ok) throw new Error(`Connect failed: ${res.status}`);
         const data = await res.json();
-        window.location.assign(data.url);
+        window.location.assign(data.connect_url);
       } catch (e: any) {
         setError(e?.message ?? "Failed to start Finch Connect.");
       } finally {
