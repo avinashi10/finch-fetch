@@ -36,8 +36,19 @@ export default function IndividualInfo({ employeeId }: { employeeId: string }) {
       <Text>Middle name: {show(data?.middle_name)}</Text>
       <Text>Last name: {show(data?.last_name)}</Text>
       <Text>Preferred name: {show(data?.preferred_name)}</Text>
-      <Text>Emails: {show(data?.emails)}</Text>
-      <Text>Phone numbers: {show(data?.phone_numbers)}</Text>
+      <Text>
+        Emails:{" "}
+        {data?.emails && data.emails.length > 0
+          ? data.emails.map((e: any) => `${e.data} (${e.type})`).join(", ")
+          : "—"}
+      </Text>
+
+      <Text>
+        Phone numbers:{" "}
+        {data?.phone_numbers && data.phone_numbers.length > 0
+          ? data.phone_numbers.map((p: any) => `${p.data} (${p.type})`).join(", ")
+          : "—"}
+      </Text>
       <Text>Gender: {show(data?.gender)}</Text>
       <Text>Ethnicity: {show(data?.ethnicity)}</Text>
       <Text>Date of birth: {show(data?.dob)}</Text>
