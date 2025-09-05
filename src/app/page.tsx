@@ -39,11 +39,17 @@ export default function Home() {
           Finch Sandbox Demo
         </Heading>
 
-        <Button>Connect to Finch</Button>
-        <CompanyCard />
-        <DirectoryList />
-        <EmployeeDetails />
-        <ErrorMessage message="Example error message" />
+        <Button onClick={handleConnect} loading={isLoading} disabled={isLoading}>
+          Connect to Finch
+        </Button>
+        {isConnected && (
+          <>
+            <CompanyCard />
+            <DirectoryList />
+            <EmployeeDetails />
+          </>
+        )}
+        {error && <ErrorMessage message={error} />}
       </Stack>
     </Container>
   );
