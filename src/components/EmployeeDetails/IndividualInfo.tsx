@@ -13,7 +13,7 @@ export default function IndividualInfo({ employeeId }: { employeeId: string }) {
       const res = await fetch(`/api/data/individual?employee_id=${encodeURIComponent(employeeId)}`, { method: "POST" });
       if (res.ok) {
         const json = await res.json();
-        setData(json);
+        setData(json.responses?.[0]?.body ?? null);
       }
     };
     loadIndividual();
