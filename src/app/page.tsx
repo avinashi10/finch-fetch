@@ -1,7 +1,15 @@
 "use client";
 
 // LIBRARY IMPORTS
-import { Button, Container, Heading, Stack } from "@chakra-ui/react";
+import {
+  Button,
+  Container,
+  Heading,
+  Stack,
+  Grid,
+  GridItem,
+  Box,
+} from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 
 // LOCAL IMPORTS
@@ -47,25 +55,38 @@ export default function Home() {
       }
     };
 
-  return (
-    <Container maxW="container.lg" py={8}>
-      <Stack padding={8}>
-        <Heading as="h1" size="lg">
-          Finch Sandbox Demo
-        </Heading>
-
-        <Button onClick={handleConnect} loading={isLoading} disabled={isLoading}>
-          Connect to Finch
-        </Button>
-        {isConnected && (
-          <>
-            <CompanyCard />
-            <DirectoryList onSelect={(id: string) => setSelectedEmployeeId(id)}  />
-            <EmployeeDetails employeeId={selectedEmployeeId ?? undefined} />
-          </>
-        )}
-        {error && <ErrorMessage message={error} />}
-      </Stack>
-    </Container>
-  );
-}
+    return (
+      <Container maxW="container.lg" py={8}>
+        <Stack padding={8}>
+          <Heading as="h1" size="lg">
+            Finch Sandbox Demo
+          </Heading>
+  
+          {!isConnected ? (
+            <Box>
+              <Button onClick={handleConnect} loading={isLoading}>
+                Connect to Finch
+              </Button>
+              {error && <ErrorMessage message={error} />}
+            </Box>
+          ) : (
+            <>
+              <CompanyCard />
+  
+              <Grid templateColumns={{ base: "1fr", md: "320px 1fr" }} gap={6}>
+                <GridItem>
+                  <DirectoryList
+                    onSelect={(id) => setSelectedEmployeeId(id)}
+                    selectedId={selectedEmployeeId ?? undefined}
+                  />
+                </GridItem>
+                <GridItem>
+                  <EmployeeDetails employeeId={selectedEmployeeId ?? undefined} />
+                </GridItem>
+              </Grid>
+            </>
+          )}
+        </Stack>
+      </Container>
+    );
+  }
