@@ -32,7 +32,7 @@ export async function POST() {
     });
 
     if (!response.ok) {
-      const errorText = await response.text(); // 👈 grab body as text
+      const errorText = await response.text();
       console.error("Finch connect error:", response.status, errorText);
     
       return NextResponse.json(
