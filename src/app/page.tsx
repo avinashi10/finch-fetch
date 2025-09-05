@@ -24,7 +24,7 @@ export default function Home() {
         const res = await fetch("/api/auth/connect", { method: "POST" });
         if (!res.ok) throw new Error(`Connect failed: ${res.status}`);
         const data = await res.json();
-        window.location.assign(data.connect_url);
+        window.location.assign(data.url);
       } catch (e: any) {
         setError(e?.message ?? "Failed to start Finch Connect.");
       } finally {
