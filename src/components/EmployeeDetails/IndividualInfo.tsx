@@ -28,6 +28,16 @@ export default function IndividualInfo({ employeeId }: { employeeId: string }) {
 
   if (!data) return <Box>Loading individual...</Box>;
 
+  if (data?.error === "not_implemented") {
+    return (
+      <Box borderWidth="1px" borderRadius="md" p={4} bg="yellow.50">
+        <Text fontWeight="bold" color="yellow.800">
+          This provider does not implement the Individual endpoint.
+        </Text>
+      </Box>
+    );
+  }  
+
   return (
     <Box borderWidth="1px" borderRadius="md" p={4}>
       <Text fontWeight="bold" mb={2}>Individual Details</Text>

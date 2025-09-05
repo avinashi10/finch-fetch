@@ -19,6 +19,17 @@ export default function CompanyCard() {
 
   if (!company) return <Box>Loading company info...</Box>;
 
+  if (company?.error === "not_implemented") {
+    return (
+      <Box borderWidth="1px" borderRadius="md" p={4} bg="yellow.50">
+        <Text fontWeight="bold" color="yellow.800">
+          This provider does not implement the Company endpoint.
+        </Text>
+      </Box>
+    );
+  }
+  
+
   return (
     <Box borderWidth="1px" borderRadius="md" p={4}>
       <Text fontWeight="bold">{company.legal_name}</Text>
