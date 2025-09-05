@@ -4,7 +4,7 @@
 import { Box, Text, DataList } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 
-export default function DirectoryList() {
+export default function DirectoryList({ onSelect }: { onSelect: (id: string) => void }) {
   const [employees, setEmployees] = useState<any[]>([]);
 
   useEffect(() => {
@@ -12,7 +12,7 @@ export default function DirectoryList() {
       const res = await fetch("/api/data/directory");
       if (res.ok) {
         const data = await res.json();
-        setEmployees(data.individuals || []); // Finch returns `individuals`
+        setEmployees(data.individuals || []);
       }
     };
     loadDirectory();
@@ -27,7 +27,11 @@ export default function DirectoryList() {
       </Text>
       <DataList.Root>
         {employees.map((emp: any) => (
-          <DataList.Item key={emp.id}>
+          <DataList.Item
+            key={emp.id}
+            onClick={() => onSelect(emp.id)}
+            cursor="pointer"
+          >
             <DataList.ItemLabel>{emp.id}</DataList.ItemLabel>
             <DataList.ItemValue>
               {emp.first_name} {emp.last_name}

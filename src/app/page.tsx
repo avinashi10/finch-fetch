@@ -15,6 +15,7 @@ export default function Home() {
   const [isConnected, setIsConnected] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [selectedEmployeeId, setSelectedEmployeeId] = useState<string | null>(null);
 
   // EFFECTS
   useEffect(() => {
@@ -59,8 +60,8 @@ export default function Home() {
         {isConnected && (
           <>
             <CompanyCard />
-            <DirectoryList />
-            <EmployeeDetails />
+            <DirectoryList onSelect={(id: string) => setSelectedEmployeeId(id)}  />
+            <EmployeeDetails employeeId={selectedEmployeeId ?? undefined} />
           </>
         )}
         {error && <ErrorMessage message={error} />}
