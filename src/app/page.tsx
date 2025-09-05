@@ -1,7 +1,8 @@
 "use client";
 
 // LIBRARY IMPORTS
-import { Container, Heading, Stack } from "@chakra-ui/react";
+import { Button, Container, Heading, Stack } from "@chakra-ui/react";
+import { useState } from "react";
 
 // LOCAL IMPORTS
 import CompanyCard from "../components/CompanyCard";
@@ -10,6 +11,27 @@ import EmployeeDetails from "../components/EmployeeDetails";
 import ErrorMessage from "../components/ErrorMessage";
 
 export default function Home() {
+  // STATE
+  const [isConnected, setIsConnected] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
+
+  // HANDLERS
+  const handleConnect = async () => {
+      try {
+        setIsLoading(true);
+        setError(null);
+        const res = await fetch("/api/finch/auth/connect", { method: "POST" });
+        if (!res.ok) throw new Error(`Connect failed: ${res.status}`);
+        const data = await res.json();
+        window.location.assign(data.url);
+      } catch (e: any) {
+        setError(e?.message ?? "Failed to start Finch Connect.");
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
   return (
     <Container maxW="container.lg" py={8}>
       <Stack padding={8}>
@@ -17,6 +39,7 @@ export default function Home() {
           Finch Sandbox Demo
         </Heading>
 
+        <Button>Connect to Finch</Button>
         <CompanyCard />
         <DirectoryList />
         <EmployeeDetails />
