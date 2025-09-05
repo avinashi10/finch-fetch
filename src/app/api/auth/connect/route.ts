@@ -32,12 +32,14 @@ export async function POST() {
     });
 
     if (!response.ok) {
-      const error = await response.json().catch(() => ({}));
+      const errorText = await response.text(); // 👈 grab body as text
+      console.error("Finch connect error:", response.status, errorText);
+    
       return NextResponse.json(
-        { error: "Failed to create Finch Connect session", details: error },
+        { error: "Failed to create Finch Connect session", details: errorText },
         { status: response.status }
       );
-    }
+    }    
 
     const data = await response.json();
     return NextResponse.json({ url: data.connect_url });
