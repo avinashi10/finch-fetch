@@ -1,7 +1,7 @@
 # Finch Fetch Demo
 
 A simple Next.js app that integrates with [Finch Sandbox](https://dashboard.tryfinch.com/) to show company, directory, individual, and employment data.  
-This project is built for the Finch technical interview challenge.
+This project is built for the Finch DSE technical challenge.
 
 ---
 
@@ -9,22 +9,23 @@ This project is built for the Finch technical interview challenge.
 
 ### 1. Clone the repo
 ```bash
-git clone https://github.com/<your-username>/finch-fetch.git
+git clone https://github.com/avinashi10/finch-fetch.git
 cd finch-fetch
 ```
 
 ### 2. Install dependencies
 
 This project works with **npm**, **yarn**, or **pnpm**. Pick your preference:
-
+   * Using `npm`:
 ```bash
-// using npm
 npm install
-
-// using yarn
+```
+   * Using `yarn`:
+```bash
 yarn install
-
-/ using pnpm
+```
+   * Using `pnpm`:
+```bash
 pnpm install
 ```
 
@@ -63,18 +64,20 @@ CUSTOMER_NAME=Acme Test
 5. Click 'Next Step'. Leave all following fields blank and click 'Generate URL'
 
 ### 6. Run the app
-```
-// using npm
-npm run dev
+   * Using `npm`:
+   ```bash
+   npm run dev
+   ```
+   * Using `yarn`:
+   ```bash
+   yarn dev
+   ```
+   * Using `pnpm`:
+   ```bash
+   pnpm dev
+   ```
 
-// using yarn
-yarn dev
-
-// using pnpm
-pnpm dev
-```
-
-Visit (http://localhost:3000)[http://localhost:3000] in your browser.
+Visit [http://localhost:3000](http://localhost:3000) in your browser.
 
 ---
 
