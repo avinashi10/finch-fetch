@@ -1,72 +1,78 @@
-# Finch Sandbox Demo
+# Finch Fetch Demo
 
-This is a simple Next.js application built for the Finch technical interview.  
-
-It connects to the **Finch Sandbox API** to fetch and display company, directory, individual, and employment data.  
+A simple Next.js app that integrates with [Finch Sandbox](https://dashboard.tryfinch.com/) to show company, directory, individual, and employment data.  
+This project is built for the Finch technical interview challenge.
 
 ---
 
 ## Getting Started
 
-1. **Clone this repo**
-   ```bash
-   git clone <repo-url>
-   cd <repo-folder>
-   ```
-
-2. **Install dependencies**
-
-   ```bash
-   npm install
-   ```
-
-3. **Set up environment variables**
-   Create a `.env.local` file in the project root with your Finch Sandbox credentials:
-
-   ```bash
-   FINCH_CLIENT_ID=your-client-id
-   FINCH_CLIENT_SECRET=your-client-secret
-   ```
-
-4. **Run the development server**
-
-   ```bash
-   npm run dev
-   ```
-
-5. **Open the app**
-   Visit [http://localhost:3000](http://localhost:3000) in your browser.
-
----
-
-## Notes
-
-* The app uses **Next.js API routes** to securely fetch data from Finch.
-* The `/payment` and `/pay-statement` endpoints are intentionally blocked.
-* Null fields and missing endpoints are handled with custom messages in the UI.
-
-
-
-
-## Getting Started
-
-First, run the development server:
-
+### 1. Clone the repo
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/<your-username>/finch-fetch.git
+cd finch-fetch
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2. Install dependencies
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+This project works with **npm**, **yarn**, or **pnpm**. Pick your preference:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+// using npm
+npm install
 
+// using yarn
+yarn install
 
+/ using pnpm
+pnpm install
+```
+
+### 3. Configure environment variables
+
+Create a file called `.env.local` in the project root:
+
+```ini
+FINCH_CLIENT_ID=your_sandbox_client_id
+FINCH_CLIENT_SECRET=your_sandbox_client_secret
+
+CUSTOMER_ID=acme-123
+CUSTOMER_NAME=Acme Test
+```
+
+### 4. Retrieve your Finch Sandbox Credentials
+
+1. Sign in at [Finch Dashboard](https://dashboard.tryfinch.com/).
+2. Go to your **Credentials**.
+3. Copy your **Sandbox Client ID** and **Sandbox Client Secret** into your `.env.local` file, replacing the placeholder values
+4. Add a **Redirect URI** in Credentials pointing to:
+
+   ```
+   http://localhost:3000/api/auth/callback
+   ```
+
+### 5. Set up your Finch Sandbox Connection
+1. Navigate to 'Connections', click 'Actions' and select 'Create a New Connect Link'
+2. Fill out the Customer Name' and 'Customer ID' fields
+
+   * Example Customer Name: `Acme Test`
+   * Example Customer ID: `acme-123`
+     (You can make up any values for testing.)
+3. Copy your **Customer Name** and **Customer ID** into your `.env.local` file, replacing the placeholder values
+4. Under 'Products' select ONLY: Company', 'Directory', 'Employment', & 'Individual'. Make sure to remove all other products, especially 'Payment' and 'Pay Statements'
+5. Click 'Next Step'. Leave all following fields blank and click 'Generate URL'
+
+### 6. Run the app
+```
+// using npm
+npm run dev
+
+// using yarn
+yarn dev
+
+// using pnpm
+pnpm dev
+```
+
+Visit (http://localhost:3000)[http://localhost:3000] in your browser.
 
