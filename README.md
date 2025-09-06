@@ -76,3 +76,19 @@ pnpm dev
 
 Visit (http://localhost:3000)[http://localhost:3000] in your browser.
 
+---
+
+## How to Use the Application
+
+1. Click “Connect to Finch” → This launches the Finch Sandbox Connect flow.
+2. Select any provider from the dropdown.
+3. Log in with Sandbox credentials
+   * for username fields use: `good_user`
+   * for password fields use: `good_pass`
+   * for API token fields use: `good_token`
+4. Once connected, you’ll see:
+   * **Company data** at the top
+   * **Employee directory** on the left
+   * **Individual + Employment** details for the selected employee on the right
+5. All fields are displayed individually; missing/null values show as `—`.
+6. If a provider doesn’t implement an endpoint, a clear banner is displayed instead.
