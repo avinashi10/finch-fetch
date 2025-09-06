@@ -23,8 +23,6 @@ export default function IndividualInfo({ employeeId }: { employeeId: string }) {
 
   // DATA HELPER FUNCTIONS
   const show = (v: any) => (v === null || v === undefined || v === "" ? "—" : String(v));
-  const join = (arr?: any[], pick?: (x: any) => any) =>
-    !arr || arr.length === 0 ? "—" : arr.map((x) => show(pick ? pick(x) : x)).join(", ");
 
   if (!data) return <Box>Loading individual...</Box>;
 
