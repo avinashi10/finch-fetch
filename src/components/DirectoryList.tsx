@@ -12,20 +12,40 @@ type Props = {
 export default function DirectoryList({ onSelect, selectedId }: Props) {
   // STATES
   const [employees, setEmployees] = useState<any[]>([]);
+  const [error, setError] = useState<string | null>(null);
 
   // HOOKS
   useEffect(() => {
     const loadDirectory = async () => {
-      const res = await fetch("/api/data/directory");
-      if (res.ok) {
+      try {
+        const res = await fetch("/api/data/directory");
         const data = await res.json();
-        setEmployees(data.individuals || []);
+        if (data.error === "not_implemented") {
+          setError("not_implemented");
+          setEmployees([]);
+        } else {
+          setEmployees(data.individuals || []);
+        }
+      } catch {
+        setError("Failed to load directory");
       }
     };
     loadDirectory();
   }, []);
+  
 
   if (!employees.length) return <Box>Loading directory...</Box>;
+
+  if (error === "not_implemented") {
+    return (
+      <Box borderWidth="1px" borderRadius="md" p={4} bg="yellow.50">
+        <Text fontWeight="bold" color="yellow.800">
+          This provider does not implement the Directory endpoint.
+        </Text>
+      </Box>
+    );
+  }
+  
 
   return (
     <Box borderWidth="1px" borderRadius="md" p={4}>

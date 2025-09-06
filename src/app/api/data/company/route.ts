@@ -14,12 +14,18 @@ export async function GET(req: NextRequest) {
   });
 
   if (!resp.ok) {
-    const details = await resp.text();
+    const details = await resp.json().catch(() => ({}));
+    if (resp.status === 404 || resp.status === 501) {
+      return NextResponse.json(
+        { error: "not_implemented" },
+        { status: resp.status }
+      );
+    }
     return NextResponse.json(
       { error: "Failed to fetch company", details },
       { status: resp.status }
     );
-  }
+  }  
 
   const data = await resp.json();
   return NextResponse.json(data);

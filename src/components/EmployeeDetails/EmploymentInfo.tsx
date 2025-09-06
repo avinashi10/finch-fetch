@@ -26,6 +26,16 @@ export default function EmploymentInfo({ employeeId }: { employeeId: string }) {
 
   if (!data) return <Box>Loading employment...</Box>;
 
+  if (data?.error === "not_implemented") {
+    return (
+      <Box borderWidth="1px" borderRadius="md" p={4} bg="yellow.50">
+        <Text fontWeight="bold" color="yellow.800">
+          This provider does not implement the Employment endpoint.
+        </Text>
+      </Box>
+    );
+  }
+  
   return (
   <Box borderWidth="1px" borderRadius="md" p={4}>
     <Text fontWeight="bold" mb={2}>Employment Details</Text>
