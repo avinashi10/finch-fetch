@@ -5,33 +5,20 @@ This project is built for the Finch DSE technical challenge.
 
 ---
 
-## Getting Started
+## 📦 Setup
+
+Before you choose how to run the app, set up your local environment.
 
 ### 1. Clone the repo
+
 ```bash
 git clone https://github.com/avinashi10/finch-fetch.git
 cd finch-fetch
 ```
 
-### 2. Install dependencies
+### 2. Create your `.env.local` file
 
-This project works with **npm**, **yarn**, or **pnpm**. Pick your preference:
-   * Using `npm`:
-```bash
-npm install
-```
-   * Using `yarn`:
-```bash
-yarn install
-```
-   * Using `pnpm`:
-```bash
-pnpm install
-```
-
-### 3. Configure environment variables
-
-Create a file called `.env.local` in the project root:
+In the root directory, create a file called `.env.local`:
 
 ```ini
 FINCH_CLIENT_ID=your_sandbox_client_id
@@ -41,7 +28,7 @@ CUSTOMER_ID=acme-123
 CUSTOMER_NAME=Acme Test
 ```
 
-### 4. Retrieve your Finch Sandbox Credentials
+### 3. Retrieve your Finch Sandbox Credentials
 
 1. Sign in at [Finch Dashboard](https://dashboard.tryfinch.com/).
 2. Go to your **Credentials**.
@@ -52,7 +39,7 @@ CUSTOMER_NAME=Acme Test
    http://localhost:3000/api/auth/callback
    ```
 
-### 5. Set up your Finch Sandbox Connection
+### 4. Set up your Finch Sandbox Connection
 1. Navigate to 'Connections', click 'Actions' and select 'Create a New Connect Link'
 2. Fill out the Customer Name' and 'Customer ID' fields
 
@@ -63,21 +50,64 @@ CUSTOMER_NAME=Acme Test
 4. Under 'Products' select ONLY: Company', 'Directory', 'Employment', & 'Individual'. Make sure to remove all other products, especially 'Payment' and 'Pay Statements'
 5. Click 'Next Step'. Leave all following fields blank and click 'Generate URL'
 
-### 6. Run the app
-   * Using `npm`:
-   ```bash
-   npm run dev
-   ```
-   * Using `yarn`:
-   ```bash
-   yarn dev
-   ```
-   * Using `pnpm`:
-   ```bash
-   pnpm dev
-   ```
 
-Visit [http://localhost:3000](http://localhost:3000) in your browser.
+---
+
+## 🐳 Run in Docker (Recommended)
+
+Run the app in a clean containerized environment — no local Node/npm setup required.
+
+### 1. Prerequisites
+
+* Install [Docker Desktop](https://www.docker.com/products/docker-desktop) and ensure it’s running.
+* Complete the **Setup** steps above (clone repo + create `.env.local` + Finch Dashboard).
+
+### 2. Build the Docker image
+
+```bash
+docker build -t finch-fetch .
+```
+
+### 3. Run the container
+
+```bash
+docker run --env-file .env.local -p 3000:3000 finch-fetch
+```
+
+Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+---
+
+## 💻 Run Locally (Without Docker)
+
+If you prefer running the app directly on your machine:
+
+### 1. Install dependencies
+
+This project supports **npm**, **yarn**, or **pnpm**. Use your preferred tool:
+
+```bash
+# npm
+npm install
+
+# or yarn
+yarn install
+
+# or pnpm
+pnpm install
+```
+
+### 2. Start the dev server
+
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+```
+
+Then visit [http://localhost:3000](http://localhost:3000) to use the app.
 
 ---
 
